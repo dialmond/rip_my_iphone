@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Talk to Cassidy</h1>
+<p><i>just remember that these aren't DM's, you're talking with me and everyone else who is in the user drop down you saw when you logged in</i></p>
+
+{% for message in objects %}
+<div class='message{% if message.user == user %} me{% endif %}'>
+  <p><b>{{ message.user }}</b> {{ message.time }}</p>
+  <pre>{{ message }} </pre>
+</div>
+{% endfor %}
+
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="send message">
+</form>
+{% endblock %}
